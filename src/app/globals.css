@@ -1,26 +1,164 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Web3 Optimized Color Palette */
+:root {
+  /* Core Background & Surfaces */
+  --background: 0 0% 12%;        /* #1f1f1f - Site background */
+  --surface-1: 0 0% 16%;         /* #2a2a2a - Card background */
+  --surface-2: 0 0% 20%;         /* #333333 - Input background */
+  
+  /* Text Colors */
+  --foreground: 0 0% 94%;        /* #f0f0f0 - Primary text */
+  --text-secondary: 0 0% 70%;    /* #b3b3b3 - Secondary text */
+  
+  /* Accent Colors */
+  --primary: 270 70% 56%;        /* #9333ea - Royal purple */
+  --secondary: 180 100% 50%;     /* #00e5ff - Bright cyan */
+  --tertiary: 160 80% 40%;       /* #10b981 - Crypto green */
+  
+  /* UI Component Colors */
+  --card: 0 0% 16%;              /* #2a2a2a - Card background */
+  --card-foreground: 0 0% 94%;   /* #f0f0f0 - Card text */
+  --popover: 0 0% 16%;           /* #2a2a2a - Popover background */
+  --popover-foreground: 0 0% 94%; /* #f0f0f0 - Popover text */
+  --primary-foreground: 0 0% 94%; /* #f0f0f0 - Text on primary */
+  --secondary-foreground: 0 0% 94%; /* #f0f0f0 - Text on secondary */
+  --muted: 0 0% 20%;             /* #333333 - Muted background */
+  --muted-foreground: 0 0% 70%;  /* #b3b3b3 - Muted text */
+  --accent: 270 70% 56%;         /* #9333ea - Accent background */
+  --accent-foreground: 0 0% 94%; /* #f0f0f0 - Accent text */
+  
+  /* Interactive States */
+  --interactive-default: 0 0% 20%;  /* #333333 */
+  --interactive-hover: 0 0% 27%;    /* #444444 */
+  --interactive-active: 0 0% 33%;   /* #555555 */
+  
+  /* Status Colors */
+  --destructive: 0 84% 60%;      /* #ef4444 - Error red */
+  --warning: 35 92% 50%;         /* #f59e0b - Warning amber */
+  --success: 160 80% 40%;        /* #10b981 - Success green */
+  
+  /* Border & Other UI Elements */
+  --border: 0 0% 27%;            /* #444444 - Border color */
+  --input: 0 0% 20%;             /* #333333 - Input background */
+  --ring: 270 70% 56%;           /* #9333ea - Focus ring */
+  --radius: 0.5rem;              /* Border radius */
+}
+
+/* Dark mode variables (for light mode themes) */
+.dark {
+  --background: 0 0% 94%;         /* #f0f0f0 - Light background */
+  --foreground: 0 0% 12%;         /* #1f1f1f - Dark text */
+  --card: 270 70% 56%;            /* #9333ea - Card background */
+  --card-foreground: 0 0% 94%;    /* #f0f0f0 - Card text */
+  --popover: 270 70% 56%;         /* #9333ea - Popover background */
+  --popover-foreground: 0 0% 94%; /* #f0f0f0 - Popover text */
+  --primary: 0 0% 20%;            /* #333333 - Primary button */
+  --primary-foreground: 0 0% 94%; /* #f0f0f0 - Button text */
+  --secondary: 0 0% 12%;          /* #1f1f1f - Secondary element */
+  --secondary-foreground: 0 0% 94%; /* #f0f0f0 - Secondary text */
+  --muted: 0 0% 12%;              /* #1f1f1f - Muted background */
+  --muted-foreground: 0 0% 70%;   /* #b3b3b3 - Muted text */
+  --accent: 0 0% 12%;             /* #1f1f1f - Accent background */
+  --accent-foreground: 0 0% 94%;  /* #f0f0f0 - Accent text */
+  --destructive: 0 84% 60%;       /* #ef4444 - Error red */
+  --destructive-foreground: 0 0% 94%; /* #f0f0f0 - Error text */
+  --border: 0 0% 12%;             /* #1f1f1f - Border color */
+  --input: 0 0% 12%;              /* #1f1f1f - Input background */
+  --ring: 0 0% 20%;               /* #333333 - Focus ring */
+}
+
+/* Override body background to ensure consistency */
+body {
+  background-color: #1f1f1f !important;
+  color: #f0f0f0;
+  background-image: none !important;
+}
+
+/* Web3 Neon Glow Effects with optimized colors */
+.neon-glow {
+  text-shadow: 0 0 5px rgba(147, 51, 234, 0.7), 0 0 10px rgba(147, 51, 234, 0.5);
+}
+
+.card-glow {
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.4), 0 0 30px rgba(147, 51, 234, 0.2);
+}
+
+/* Futuristic Border with optimized colors */
+.border-gradient {
+  border: 1px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: 
+    linear-gradient(to bottom right, #2a2a2a, #2a2a2a), 
+    linear-gradient(135deg, rgba(147, 51, 234, 0.5), rgba(0, 229, 255, 0.5));
+}
+
+/* Animated gradient for highlight elements with optimized colors */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.gradient-text {
+  background: linear-gradient(90deg, #9333ea, #00e5ff, #9333ea);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
 }

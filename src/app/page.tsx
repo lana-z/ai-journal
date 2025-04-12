@@ -1,103 +1,122 @@
-import Image from "next/image";
+import Image from "next/image"
+import { Card } from "@/components/ui/card"
+import Nav from "@/components/nav"
+import SocialLinks from "@/components/social-links"
+import SearchEntries from "@/components/search-entries"
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-[#1f1f1f]">
+      <Nav />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <main className="max-w-[1600px] mx-auto px-0 md:px-4 pt-16 pb-20 relative">
+        {/* Mobile layout - only visible on small screens */}
+        <div className="md:hidden flex flex-col space-y-8 m-4">
+          {/* Title and subheading */}
+          <div className="space-y-4">
+            <h1 className="text-3xl font-bold leading-tight">
+              My AI Journal
+            </h1>
+            <div className="text-xl leading-relaxed">
+              <span className="bg-gradient-to-r from-[#9333ea] to-[#00e5ff] px-1 neon-glow">A chronological record</span><br />
+              of my journey with AI tools and workflows
+            </div>
+
+          </div>
+
+          {/* Abbreviated bio */}
+          <div className="flex items-center space-x-4 bg-[#2a2a2a] p-4 rounded-xl">
+            <div className="rounded-full overflow-hidden border-2 border-[#9333ea] p-1 bg-gradient-to-r from-[#9333ea] to-[#00e5ff] self-start w-fit">
+              <Image
+                src="/lana-pfp-pink-purple.png?height=60&width=60"
+                alt="Lana Zumbrunn"
+                width={60}
+                height={60}
+                className="rounded-full"
+              />
+            </div>
+            <div>
+              <p className="text-sm leading-relaxed text-[#b3b3b3]">
+                I'm a full stack developer who does technical consulting and contract team leadership. My background is in startup ecosystem building and strategy.
+              </p>
+              <SocialLinks />
+            </div>
+          </div>
+
+          {/* Search */}
+          <SearchEntries isMobile={true} />
+
+          {/* Journal Entries */}
+          <div className="space-y-8">
+            <Card className="p-8 shadow-md rounded-xl hover:shadow-lg transition-shadow bg-[#2a2a2a] border-gradient card-glow">
+              <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">Loading entries...</h4>
+              <p className="text-[#f0f0f0] leading-relaxed font-semibold">
+                Journal entries will be loaded from the database.
+              </p>
+              <p className="text-[#b3b3b3] leading-relaxed mt-2">
+                This is a placeholder that will be replaced with actual journal entries once the database integration is complete.
+              </p>
+            </Card>
+          </div>
+        </div>
+
+        {/* Desktop layout - hidden on mobile */}
+        {/* Left Column - Bio (sticky) */}
+        <div className="hidden flex md:flex md:flex-row m-4 md:mx-0 md:my-12">
+          <div className="md:mr-30 md:flex md:flex-row md:w-[25%] space-y-8 md:sticky md:top-[20%] md:h-fit min-w-[70px] min-h-[70px]">
+            <div className="mx-5 rounded-full overflow-hidden border-2 border-[#9333ea] p-1 bg-gradient-to-r from-[#9333ea] to-[#00e5ff] self-start w-fit flex items-center justify-center min-w-[70px] min-h-[70px]">
+              <Image
+                src="/lana-pfp-pink-purple.png?height=200&width=200"
+                alt="Lana Zumbrunn"
+                width={200}
+                height={200}
+                className="rounded-full"
+              />
+            </div>
+
+            <div className="flex flex-col items-start gap-5">
+              <p className="text-sm lg:text-lg leading-relaxed text-[#b3b3b3]">
+                I do technical consulting and contract team leadership.
+              </p>
+              <p className="text-sm lg:text-lg leading-relaxed pt-2 text-[#b3b3b3]">
+                I became a developer because of my love for new and emerging tech like AI, blockchain and multi-cloud.
+              </p>
+              <p className="text-sm lg:text-lg leading-relaxed pt-2 text-[#b3b3b3]">My background is in startup ecosystem building and strategy.</p>
+              <div className="pt-2">
+                <h3 className="text-base md:text-lg mb-4 text-[#00e5ff]">Find Me</h3>
+                <SocialLinks />
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column - Content (scrolls normally) */}
+          <div className="w-full md:w-[50%] space-y-12">
+            <div className="space-y-8">
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+                My AI Journal<br />
+                <span className="bg-gradient-to-r from-[#9333ea] to-[#00e5ff] px-1 neon-glow">A chronological record</span><br />
+                of my journey with AI tools and workflows
+              </h1>
+              <div>
+                <SearchEntries />
+              </div>
+            </div>
+            {/* Journal Entries */}
+            <div className="space-y-8">
+              <Card className="p-8 shadow-md rounded-xl hover:shadow-lg transition-shadow bg-[#2a2a2a] border-gradient card-glow">
+                <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">Loading entries...</h4>
+                <p className="text-[#f0f0f0] leading-relaxed font-semibold">
+                  Journal entries will be loaded from the database.
+                </p>
+                <p className="text-[#b3b3b3] leading-relaxed mt-2">
+                  This is a placeholder that will be replaced with actual journal entries once the database integration is complete.
+                </p>
+              </Card>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
