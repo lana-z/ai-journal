@@ -15,6 +15,30 @@ Keeps CrewAI logic decoupled and testable
 
 ---
 
+#### Architecture Notes
+
+Adds a Python-only MCP server as a standalone process to encapsulate tools used across agents or automation workflows. Tasks like keyword extraction, blog scoring, or notification logic will be MCP tools. Simpler LLM calls (e.g., tag suggestion or title generation) will be handled inline without MCP.
+
+Tag suggestions and social prompts will be handled inline in the app using direct LLM calls. MCP will only be used for shared logic or agent workflows, not lightweight UI helpers.
+
+Only use MCP for:
+- Multi-agent shared logic (e.g. SEO score used by blog and social agents)
+- Background/scheduled operations (e.g. blog performance re-analysis)
+- Notifications or structured I/O integrations
+
+Avoid MCP for:
+- Single-step UI enhancements
+- Simple model completions (titles, tags, summaries)
+
+| Function          | Handled via MCP? | Why                                  |
+| ----------------- | ---------------- | ------------------------------------- |
+| Keyword extraction| ✅ Yes           | Used by multiple agents              |
+| Blog score        | ✅ Yes           | Shared and reused                    |
+| Tag suggestion    | ❌ No            | Inline app UX                        |
+| Social caption    | ❌ Initially     | Simple formatting, fast inline       |
+
+
+
 
 ## Project File Structure (Next.js 13+ App Router)
 
@@ -28,7 +52,7 @@ complete this section
 - **Database**: PostgreSQL via Prisma (Neon)
 - **Authentication**: Clerk or NextAuth.js
 - **AI**: OpenAI API, CrewAI agent orchestration
-- **MCP Server**: Python-based agent tool server (SEO, keywording, web scraping, notifications)
+- **MCP Server**: Python-based tool server exposing shared logic (SEO, keywording, scraping) to CrewAI agents via MCP
 - **Hosting**: Vercel
 - **Media**: Vercel Blob
 

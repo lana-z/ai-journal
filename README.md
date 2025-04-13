@@ -1,6 +1,6 @@
 # AI Journal App
 
-A notes and blog application implemented with AI integration and Model Context Protocol (MCP).
+A notes and blog application implemented with AI integration and Model Context Protocol (MCP) .
 
 ## Project Overview
 
