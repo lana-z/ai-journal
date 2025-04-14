@@ -37,7 +37,7 @@ export default function Home() {
             </div>
             <div>
               <p className="text-sm leading-relaxed text-[#b3b3b3]">
-                I'm a full stack developer who does technical consulting and contract team leadership. My background is in startup ecosystem building and strategy.
+                I&apos;m a full stack developer who does technical consulting and contract team leadership. My background is in startup ecosystem building and strategy.
               </p>
               <SocialLinks />
             </div>
@@ -76,7 +76,7 @@ export default function Home() {
 
             <div className="flex flex-col items-start gap-5">
               <p className="text-sm lg:text-lg leading-relaxed text-[#b3b3b3]">
-                I do technical consulting and contract team leadership.
+              I&apos;m a full stack dev who does technical consulting and contract team leadership.
               </p>
               <p className="text-sm lg:text-lg leading-relaxed pt-2 text-[#b3b3b3]">
                 I became a developer because of my love for new and emerging tech like AI, blockchain and multi-cloud.

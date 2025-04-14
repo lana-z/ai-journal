@@ -147,10 +147,10 @@ export async function POST(request: Request) {
 
 ### Phase 1: Core
 - [x] Initialize Next.js app with Tailwind CSS and Shadcn (complete)
-- [ ] Set up project routing and page structure
-  - [ ] Configure app router with proper layout hierarchy
-  - [ ] Implement responsive navigation component
-  - [ ] Set up error handling and loading states
+- [x] Set up project routing and page structure
+  - [x] Configure app router with proper layout hierarchy
+  - [x] Implement responsive navigation component
+  - [x] Set up error handling and loading states
 - [ ] Set up Vercel deployment
   - [ ] Configure environment variables
   - [ ] Set up preview deployments for branches
@@ -273,3 +273,11 @@ Cron jobs are automated scheduled tasks...
   - [ ] Blog post health checks
     - [ ] Score stale or underperforming posts
     - [ ] Trigger re-generation or enhancement
+
+## TODO Notes: Skipped During Phase Work 
+- [ ] Change mobile menu component (mobile-menu.tsx) from slide-out sheet to something I like better
+- [ ] Finish content on Let's Partner to make an Impact section on About Me page
+- [ ] Logo/ more interesting header
+- [ ] Add custom favicon
+- [ ] Check metadata language
+
