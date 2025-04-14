@@ -1,6 +1,11 @@
 import Link from "next/link"
 import Nav from "@/components/nav"
 
+export const metadata = {
+  title: "Blog | Lana Zumbrunn - AI Journal",
+  description: "Blog posts about AI tools, workflows, and experiences.",
+}
+
 export default function BlogPage() {
   return (
     <div style={{ backgroundColor: "#1f1f1f" }} className="min-h-screen">
