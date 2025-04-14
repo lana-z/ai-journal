@@ -59,7 +59,7 @@ The project is being implemented in phases:
 3. **Phase 3**: AI Integration
 4. **Phase 4**: Automation
 
-See the [planning document](./docs/planning.md) for more details.
+See the [planning document](./docs/planning.md) for more details and the implementation change log.
 
 ## License
 
