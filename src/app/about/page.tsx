@@ -3,6 +3,11 @@ import Link from "next/link"
 import Nav from "@/components/nav"
 import SocialLinks from "@/components/social-links"
 
+export const metadata = {
+  title: "About | Lana Zumbrunn - AI Journal",
+  description: "Learn more about Lana Zumbrunn, her background, and her work with startups and AI tech.",
+}
+
 export default function AboutPage() {
   return (
     <div style={{ backgroundColor: "#1f1f1f" }} className="min-h-screen">
