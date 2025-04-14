@@ -151,9 +151,9 @@ export async function POST(request: Request) {
   - [x] Configure app router with proper layout hierarchy
   - [x] Implement responsive navigation component
   - [x] Set up error handling and loading states
-- [ ] Set up Vercel deployment
-  - [ ] Configure environment variables
-  - [ ] Set up preview deployments for branches
+- [x] Set up Vercel deployment
+  - [x] Configure environment variables
+  - [x] Set up preview deployments for branches
 - [ ] Create Prisma schema and connect to Neon/PostgreSQL
   - [ ] Define models for users, journal entries, blog posts, tags
   - [ ] Set up database migrations workflow
