@@ -1,0 +1,62 @@
+// Prisma schema file, docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String?
+  email         String         @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?        // Hashed password if using credentials
+  role          UserRole       @default(ADMIN) // Default to ADMIN for this phase
+  bio           String?        // Admin profile information
+  journalEntries JournalEntry[]
+  blogPosts     BlogPost[]     // For tracking which admin created/edited posts
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  USER          // For future expansion
+}
+
+model JournalEntry {
+  id          String    @id @default(cuid())
+  date        DateTime
+  title       String
+  content     String
+  tags        String[]
+  blogPost    BlogPost?
+  published   Boolean   @default(false)
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model BlogPost {
+  id             String       @id @default(cuid())
+  slug           String       @unique
+  title          String
+  summary        String
+  content        String       @db.Text
+  publishDate    DateTime
+  journalEntry   JournalEntry @relation(fields: [journalEntryId], references: [id])
+  journalEntryId String       @unique
+  author         User         @relation(fields: [authorId], references: [id])
+  authorId       String
+  tags           String[]
+  aiGenerated    Boolean      @default(true)
+  published      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
