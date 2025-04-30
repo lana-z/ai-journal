@@ -155,7 +155,7 @@ export async function POST(request: Request) {
   - [x] Configure environment variables
   - [x] Set up preview deployments for branches
 - [ ] Create Prisma schema and connect to Neon/PostgreSQL
-  - [ ] Define models for users, journal entries, blog posts, tags
+  - [x] Define models for users, journal entries, blog posts, tags
   - [ ] Set up database migrations workflow
   - [ ] Implement connection pooling for serverless environment
 - [ ] Seed example content (journal entries, blog posts)
@@ -280,4 +280,6 @@ Cron jobs are automated scheduled tasks...
 - [ ] Logo/ more interesting header
 - [ ] Add custom favicon
 - [ ] Check metadata language
+- [ ] Add custom favicon
+- [ ] Add normalization of tags, deduplication, validation,and slugification or consider a dedicated tags model enabling tag management, metadata, and better filtering. Currently the tags are simply implemented as a string array in the journal entry model.
 
