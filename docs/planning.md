@@ -3,6 +3,11 @@
 ## Overview
 The AI Journal App allows users to read short journal entries and click through to full blog posts generated and enhanced by AI. Admins create the initial entries and CrewAI agents and MCP (Model Context Protocol) act as research, editorial and marketing team enhancing the AI-driven content and automating the workflow. 
 
+The app has two distinct interfaces:
+1. **Reader Interface**: A public-facing, polished UI for readers to discover and consume content
+2. **Admin Interface**: A functional dashboard for the admin (single user) to create journal entries and manage content
+
+This separation allows for a focused user experience for readers while providing all necessary tools for content creation to the admin.
 
 ### Architecture
 Next.js backend in-place (no Python backend switch)
@@ -36,9 +41,6 @@ Avoid MCP for:
 | Blog score        | ✅ Yes           | Shared and reused                    |
 | Tag suggestion    | ❌ No            | Inline app UX                        |
 | Social caption    | ❌ Initially     | Simple formatting, fast inline       |
-
-
-
 
 ## Project File Structure (Next.js 13+ App Router)
 
@@ -156,29 +158,31 @@ export async function POST(request: Request) {
   - [x] Set up preview deployments for branches
 - [ ] Create Prisma schema and connect to Neon/PostgreSQL
   - [x] Define models for users, journal entries, blog posts, tags
-  - [ ] Set up database migrations workflow
+  - [x] Set up database migrations workflow
+  - [x] Create and connect to Neon PostgreSQL database
   - [ ] Implement connection pooling for serverless environment
-- [ ] Seed example content (journal entries, blog posts)
-  - [ ] Create seed script with realistic sample data
+- [x] Seed example content (journal entries, blog posts)
+  - [x] Create seed script with realistic sample data
+  - [x] Verify seed data in database
   - [ ] Include varied entry types for testing
-- [ ] Implement journal entry listing on / (Home)
-  - [ ] Create card components for entries
+
+### Phase 2: Admin & Reader Interfaces
+- [ ] Implement reader-focused home page
+  - [x] Create card components for journal entry previews
+  - [ ] Connect reader interface to database (display real journal entries)
   - [ ] Add filtering and sorting options
   - [ ] Implement pagination for large datasets
-
-### Phase 2: Journal & Blog Features
+  - [ ] Design polished UI focused on content discovery
 - [ ] Implement admin interface and authentication (Clerk or NextAuth.js)
   - [ ] Set up authentication provider
   - [ ] Create protected routes and middleware
   - [ ] Build admin dashboard layout
+  - [ ] Create journal entry form with rich text editor
+  - [ ] Implement journal entry management (create, edit, delete)
 - [ ] Add AI-assisted tag suggestions (prompt to OpenAI)
   - [ ] Implement OpenAI API integration
   - [ ] Create prompt template for tag extraction
   - [ ] Add UI for accepting/rejecting suggestions
-- [ ] Create markdown preview editor for blog content
-  - [ ] Implement rich text editing capabilities
-  - [ ] Add live preview functionality
-  - [ ] Support image uploads and embedding
 - [ ] Implement blog post listing on /blog (Blog)
   - [ ] Create filterable post grid
   - [ ] Add tag-based navigation
@@ -187,6 +191,10 @@ export async function POST(request: Request) {
   - [ ] Build responsive post template
   - [ ] Add related posts section
   - [ ] Implement social sharing options
+- [ ] Test Phase 2 features
+  - [ ] Test admin workflow: creating, editing, and managing journal entries
+  - [ ] Test reader experience: browsing, filtering, and reading content
+  - [ ] Ensure both interfaces are functional before proceeding to Phase 3
 
 ### Phase 3: CrewAI Workflow
 - [ ] Implement /api/generate-blog/route.ts (OpenAI integration)
@@ -282,4 +290,3 @@ Cron jobs are automated scheduled tasks...
 - [ ] Check metadata language
 - [ ] Add custom favicon
 - [ ] Add normalization of tags, deduplication, validation,and slugification or consider a dedicated tags model enabling tag management, metadata, and better filtering. Currently the tags are simply implemented as a string array in the journal entry model.
-
