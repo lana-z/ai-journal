@@ -156,7 +156,7 @@ export async function POST(request: Request) {
 - [x] Set up Vercel deployment
   - [x] Configure environment variables
   - [x] Set up preview deployments for branches
-- [ ] Create Prisma schema and connect to Neon/PostgreSQL
+- [x] Create Prisma schema and connect to Neon/PostgreSQL
   - [x] Define models for users, journal entries, blog posts, tags
   - [x] Set up database migrations workflow
   - [x] Create and connect to Neon PostgreSQL database
@@ -169,7 +169,7 @@ export async function POST(request: Request) {
 ### Phase 2: Admin & Reader Interfaces
 - [ ] Implement reader-focused home page
   - [x] Create card components for journal entry previews
-  - [ ] Connect reader interface to database (display real journal entries)
+  - [x] Connect reader interface to database (display real journal entries)
   - [ ] Add filtering and sorting options
   - [ ] Implement pagination for large datasets
   - [ ] Design polished UI focused on content discovery

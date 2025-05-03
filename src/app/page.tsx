@@ -3,8 +3,13 @@ import { Card } from "@/components/ui/card"
 import Nav from "@/components/nav"
 import SocialLinks from "@/components/social-links"
 import SearchEntries from "@/components/search-entries"
+import { getJournalEntries } from "@/lib/db"
+import { JournalEntryCard } from "@/components/journal-entry-card"
 
-export default function Home() {
+export default async function Home() {
+  // Fetch journal entries from the database
+  const journalEntries = await getJournalEntries();
+  
   return (
     <div className="min-h-screen bg-[#1f1f1f]">
       <Nav />
@@ -48,15 +53,21 @@ export default function Home() {
 
           {/* Journal Entries */}
           <div className="space-y-8">
-            <Card className="p-8 shadow-md rounded-xl hover:shadow-lg transition-shadow bg-[#2a2a2a] border-gradient card-glow">
-              <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">Loading entries...</h4>
-              <p className="text-[#f0f0f0] leading-relaxed font-semibold">
-                Journal entries will be loaded from the database.
-              </p>
-              <p className="text-[#b3b3b3] leading-relaxed mt-2">
-                This is a placeholder that will be replaced with actual journal entries once the database integration is complete.
-              </p>
-            </Card>
+            {journalEntries.length > 0 ? (
+              journalEntries.map((entry) => (
+                <JournalEntryCard key={entry.id} entry={entry} />
+              ))
+            ) : (
+              <Card className="p-8 shadow-md rounded-xl hover:shadow-lg transition-shadow bg-[#2a2a2a] border-gradient card-glow">
+                <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">No entries yet</h4>
+                <p className="text-[#f0f0f0] leading-relaxed font-semibold">
+                  No journal entries found.
+                </p>
+                <p className="text-[#b3b3b3] leading-relaxed mt-2">
+                  Check back soon for new content!
+                </p>
+              </Card>
+            )}
           </div>
         </div>
 
@@ -104,15 +115,21 @@ export default function Home() {
             </div>
             {/* Journal Entries */}
             <div className="space-y-8">
-              <Card className="p-8 shadow-md rounded-xl hover:shadow-lg transition-shadow bg-[#2a2a2a] border-gradient card-glow">
-                <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">Loading entries...</h4>
-                <p className="text-[#f0f0f0] leading-relaxed font-semibold">
-                  Journal entries will be loaded from the database.
-                </p>
-                <p className="text-[#b3b3b3] leading-relaxed mt-2">
-                  This is a placeholder that will be replaced with actual journal entries once the database integration is complete.
-                </p>
-              </Card>
+              {journalEntries.length > 0 ? (
+                journalEntries.map((entry) => (
+                  <JournalEntryCard key={entry.id} entry={entry} />
+                ))
+              ) : (
+                <Card className="p-8 shadow-md rounded-xl hover:shadow-lg transition-shadow bg-[#2a2a2a] border-gradient card-glow">
+                  <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">No entries yet</h4>
+                  <p className="text-[#f0f0f0] leading-relaxed font-semibold">
+                    No journal entries found.
+                  </p>
+                  <p className="text-[#b3b3b3] leading-relaxed mt-2">
+                    Check back soon for new content!
+                  </p>
+                </Card>
+              )}
             </div>
           </div>
         </div>
