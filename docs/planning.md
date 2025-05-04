@@ -160,11 +160,9 @@ export async function POST(request: Request) {
   - [x] Define models for users, journal entries, blog posts, tags
   - [x] Set up database migrations workflow
   - [x] Create and connect to Neon PostgreSQL database
-  - [ ] Implement connection pooling for serverless environment
 - [x] Seed example content (journal entries, blog posts)
   - [x] Create seed script with realistic sample data
   - [x] Verify seed data in database
-  - [ ] Include varied entry types for testing
 
 ### Phase 2: Admin & Reader Interfaces
 - [ ] Implement reader-focused home page
@@ -195,6 +193,7 @@ export async function POST(request: Request) {
   - [ ] Test admin workflow: creating, editing, and managing journal entries
   - [ ] Test reader experience: browsing, filtering, and reading content
   - [ ] Ensure both interfaces are functional before proceeding to Phase 3
+  - [ ] Test and refine Responsive design for different screen sizes and mobile
 
 ### Phase 3: CrewAI Workflow
 - [ ] Implement /api/generate-blog/route.ts (OpenAI integration)
@@ -287,6 +286,9 @@ Cron jobs are automated scheduled tasks...
 - [ ] Finish content on Let's Partner to make an Impact section on About Me page
 - [ ] Logo/ more interesting header
 - [ ] Add custom favicon
-- [ ] Check metadata language
+- [ ] Check metadata language / optimize SEO 
+- [ ] Implement OpenGraph tags for social sharing
+- [ ] Set up basic analytics to track page load times and user interactions
 - [ ] Add custom favicon
 - [ ] Add normalization of tags, deduplication, validation,and slugification or consider a dedicated tags model enabling tag management, metadata, and better filtering. Currently the tags are simply implemented as a string array in the journal entry model.
+  - [ ] Implement connection pooling for Vercel serverless environment when needed for higher traffic
