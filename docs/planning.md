@@ -168,8 +168,8 @@ export async function POST(request: Request) {
 - [ ] Implement reader-focused home page
   - [x] Create card components for journal entry previews
   - [x] Connect reader interface to database (display real journal entries)
-  - [ ] Add filtering and sorting options
-  - [ ] Implement pagination for large datasets
+  - [x] Add filtering and sorting options
+  - [x] Implement pagination for large tag search results
   - [ ] Design polished UI focused on content discovery
 - [ ] Implement admin interface and authentication (Clerk or NextAuth.js)
   - [ ] Set up authentication provider
