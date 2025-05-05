@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 // PrismaClient is attached to the `global` object in development to prevent
 // exhausting database connection limit.
@@ -33,15 +33,15 @@ export async function getJournalEntries(filters?: JournalEntryFilters) {
     } = filters || {};
 
     // Build where clause
-    const where: any = {
+    const where: Prisma.JournalEntryWhereInput = {
       published: true,
     };
 
     // Add search filter
     if (search) {
       where.OR = [
-        { title: { contains: search, mode: 'insensitive' } },
-        { content: { contains: search, mode: 'insensitive' } },
+        { title: { contains: search, mode: 'insensitive' as Prisma.QueryMode } },
+        { content: { contains: search, mode: 'insensitive' as Prisma.QueryMode } },
       ];
     }
 
@@ -53,7 +53,7 @@ export async function getJournalEntries(filters?: JournalEntryFilters) {
     }
 
     // Determine sort order
-    const orderBy: any = {};
+    const orderBy: Prisma.JournalEntryOrderByWithRelationInput = {};
     switch (sort) {
       case 'oldest':
         orderBy.date = 'asc';

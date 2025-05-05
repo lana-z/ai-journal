@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card"
 import Nav from "@/components/nav"
 import SocialLinks from "@/components/social-links"
 import { FilterBar } from "@/components/filter-bar"
-import { getJournalEntries, getAllTags, type JournalEntryFilters } from "@/lib/db"
+import { getJournalEntries, getAllTags, type JournalEntryFilters, type JournalEntrySortOption } from "@/lib/db"
 import { JournalEntryCard } from "@/components/journal-entry-card"
 import { Pagination } from "@/components/pagination"
 
@@ -26,7 +26,7 @@ export default async function Home({ searchParams }: HomeProps) {
   const filters: JournalEntryFilters = {
     search: params.search,
     tags: params.tags?.split(',').filter(Boolean),
-    sort: (params.sort as any) || 'newest',
+    sort: (params.sort as JournalEntrySortOption) || 'newest',
     page: params.page ? parseInt(params.page) : 1,
     pageSize: ITEMS_PER_PAGE
   };
