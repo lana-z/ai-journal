@@ -50,6 +50,34 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Environment Variables
+
+Generate a secret key for NextAuth.js:
+
+```bash
+openssl rand -base64 32
+```
+
+Add the secret key to your environment variables:
+
+```bash
+NEXTAUTH_SECRET="your-secret-key-here"
+```
+
+Add the URL of your development server to your environment variables:
+
+```bash
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+Add the URL of your production server to your environment variables:
+
+```bash
+NEXTAUTH_URL="https://your-production-server.com"
+```
+
+The admin interface is available at `/admin/login`.
+
 ## Implementation Plan
 
 The project is being implemented in phases:
