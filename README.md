@@ -21,8 +21,8 @@ Lana Zumbrunn
 
 - **Frontend**: Next.js (App Router), Tailwind CSS, Shadcn/ui
 - **Backend**: Next.js API routes
-- **Database**: PostgreSQL via Prisma (Neon) - coming soon
-- **Authentication**: Clerk or NextAuth.js - coming soon
+- **Database**: PostgreSQL via Prisma (Neon)
+- **Authentication**: NextAuth.js with credentials provider
 - **AI Integration**: OpenAI API, CrewAI agent orchestration - coming soon
 - **Hosting**: Vercel
 
@@ -52,31 +52,36 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Environment Variables
 
+Create a `.env.local` file in the root directory with the following variables:
+
+```bash
+# NextAuth.js
+NEXTAUTH_SECRET="your-secret-key-here"
+NEXTAUTH_URL="http://localhost:3000"
+
+# Database
+DATABASE_URL="your-neon-database-url"
+```
+
 Generate a secret key for NextAuth.js:
 
 ```bash
 openssl rand -base64 32
 ```
 
-Add the secret key to your environment variables:
+## Authentication
+
+Admin login is available at `/login`.
+
+Default admin credentials:
+- Email: admin@example.com
+- Password: Password123!
+
+To create admin users, run:
 
 ```bash
-NEXTAUTH_SECRET="your-secret-key-here"
+npx ts-node scripts/create-admin-user.ts
 ```
-
-Add the URL of your development server to your environment variables:
-
-```bash
-NEXTAUTH_URL="http://localhost:3000"
-```
-
-Add the URL of your production server to your environment variables:
-
-```bash
-NEXTAUTH_URL="https://your-production-server.com"
-```
-
-The admin interface is available at `/admin/login`.
 
 ## Implementation Plan
 
