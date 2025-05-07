@@ -165,16 +165,15 @@ export async function POST(request: Request) {
   - [x] Verify seed data in database
 
 ### Phase 2: Admin & Reader Interfaces
-- [ ] Implement reader-focused home page
+- [x] Implement reader-focused home page
   - [x] Create card components for journal entry previews
   - [x] Connect reader interface to database (display real journal entries)
-  - [ ] Add filtering and sorting options
-  - [ ] Implement pagination for large datasets
-  - [ ] Design polished UI focused on content discovery
-- [ ] Implement admin interface and authentication (Clerk or NextAuth.js)
-  - [ ] Set up authentication provider
-  - [ ] Create protected routes and middleware
-  - [ ] Build admin dashboard layout
+  - [x] Add filtering and sorting options
+  - [x] Implement pagination for large tag search results
+- [ ] Implement admin interface and authentication (NextAuth.js)
+  - [x] Set up authentication provider
+  - [x] Create protected routes and middleware
+  - [x] Build admin dashboard layout
   - [ ] Create journal entry form with rich text editor
   - [ ] Implement journal entry management (create, edit, delete)
 - [ ] Add AI-assisted tag suggestions (prompt to OpenAI)
@@ -291,4 +290,27 @@ Cron jobs are automated scheduled tasks...
 - [ ] Set up basic analytics to track page load times and user interactions
 - [ ] Add custom favicon
 - [ ] Add normalization of tags, deduplication, validation,and slugification or consider a dedicated tags model enabling tag management, metadata, and better filtering. Currently the tags are simply implemented as a string array in the journal entry model.
-  - [ ] Implement connection pooling for Vercel serverless environment when needed for higher traffic
+- [ ] Implement connection pooling for Vercel serverless environment when needed for higher traffic
+- [ ] Design more polished UI focused on content discovery
+      - [ ] Visual Hierarchy Improvements:
+        - [ ] Refine the card design with hover effects
+        - [ ] Add visual indicators for popular tags
+        - [ ] Improve typography contrast and readability
+        - [ ] Add animations for interactions
+      - [ ] Content Preview Enhancements:
+        - [ ] Add estimated reading time to journal entries
+        - [ ] Display a visual indicator for entries that have associated blog posts
+        - [ ] Implement a "featured entry" component for highlighting important content
+      - [ ] Navigation Improvements:
+        - [ ] Add a "related entries" section at the bottom of each entry
+        - [ ] Implement a "tag cloud" visualization that shows popular topics
+      - [ ] Add keyboard navigation support
+      - [ ] Responsive Design Refinements:
+        - [ ] Optimize the filter bar for different screen sizes
+        - [ ] Improve mobile experience with touch controls
+        - [ ] Ensure consistent spacing and alignment
+      - [ ] Accessibility Enhancements:
+        - [ ] Add ARIA labels and roles
+        - [ ] Ensure sufficient color contrast
+        - [ ] Implement focus states for keyboard navigation
+        - [ ] Test with screen readers

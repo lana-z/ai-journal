@@ -2,6 +2,7 @@ import type React from "react"
 import "@/app/globals.css"
 import { Inter, Caveat } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import AuthProvider from "@/components/auth-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 const caveat = Caveat({ 
@@ -20,10 +21,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.className} ${caveat.variable}`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} ${caveat.variable}`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
