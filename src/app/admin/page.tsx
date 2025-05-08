@@ -21,8 +21,7 @@ interface DashboardStats {
 }
 
 export default function AdminDashboard() {
-  // Session will be used for authentication checks in the future
-  const { data: _session } = useSession();
+  useSession();
   const [stats, setStats] = useState<DashboardStats>({
     totalJournalEntries: 0,
     totalBlogPosts: 0,

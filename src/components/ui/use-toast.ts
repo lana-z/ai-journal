@@ -31,10 +31,13 @@ function genId() {
   return count.toString()
 }
 
-const ADD_TOAST = "ADD_TOAST";
-const UPDATE_TOAST = "UPDATE_TOAST";
-const DISMISS_TOAST = "DISMISS_TOAST";
-const REMOVE_TOAST = "REMOVE_TOAST";
+// Define action type constants as an enum instead of individual constants
+enum ActionTypeEnum {
+  ADD_TOAST = "ADD_TOAST",
+  UPDATE_TOAST = "UPDATE_TOAST",
+  DISMISS_TOAST = "DISMISS_TOAST",
+  REMOVE_TOAST = "REMOVE_TOAST"
+}
 
 type ActionType = ActionTypes
 

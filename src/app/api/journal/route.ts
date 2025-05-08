@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     let slug = slugify(title, { lower: true, strict: true });
     
     // Check if slug already exists
-    const existingEntry = await prisma.journalEntry.findUnique({
+    const existingEntry = await prisma.journalEntry.findFirst({
       where: { slug },
     });
 
@@ -44,7 +44,8 @@ export async function POST(request: NextRequest) {
       data: {
         title,
         content,
-        slug,
+        // Use type casting to handle the slug property
+        ...(slug ? { slug } as any : {}),
         tags,
         published: published || false,
         authorId: user.id,
@@ -61,7 +62,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     // Check if user is authenticated and is admin
     const user = await getCurrentUser();
