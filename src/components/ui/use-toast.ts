@@ -17,12 +17,12 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
-const actionTypes = {
+type ActionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
   DISMISS_TOAST: "DISMISS_TOAST",
   REMOVE_TOAST: "REMOVE_TOAST",
-} as const
+}
 
 let count = 0
 
@@ -31,7 +31,12 @@ function genId() {
   return count.toString()
 }
 
-type ActionType = typeof actionTypes
+const ADD_TOAST = "ADD_TOAST";
+const UPDATE_TOAST = "UPDATE_TOAST";
+const DISMISS_TOAST = "DISMISS_TOAST";
+const REMOVE_TOAST = "REMOVE_TOAST";
+
+type ActionType = ActionTypes
 
 type Action =
   | {
@@ -76,8 +81,6 @@ const reducer = (state: State, action: Action): State => {
     case "DISMISS_TOAST": {
       const { toastId } = action
 
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
       if (toastId) {
         addToRemoveQueue(toastId)
       } else {

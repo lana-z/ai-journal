@@ -9,7 +9,7 @@ interface EditJournalEntryPageProps {
   };
 }
 
-export async function generateMetadata({ params }: EditJournalEntryPageProps) {
+export async function generateMetadata(_props: EditJournalEntryPageProps) {
   return {
     title: "Edit Journal Entry - Admin Dashboard",
   };

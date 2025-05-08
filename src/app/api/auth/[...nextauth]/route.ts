@@ -6,7 +6,6 @@ import { AuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
 
-// Remove PrismaAdapter to avoid type conflicts
 export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
@@ -53,7 +52,7 @@ export const authOptions: AuthOptions = {
     strategy: "jwt" as const,
   },
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user: any }) {
+    async jwt({ token, user }) {
       if (user) {
         token.role = user.role;
         token.id = user.id;

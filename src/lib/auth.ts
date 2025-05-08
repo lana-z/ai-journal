@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 import { Session } from "next-auth";
 
 export async function getSession(): Promise<Session | null> {
-  return await getServerSession(authOptions as any);
+
+  return await getServerSession(authOptions);
 }
 
 export async function getCurrentUser() {

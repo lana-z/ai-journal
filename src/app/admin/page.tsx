@@ -7,14 +7,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { PlusCircle, BookOpen, FileText, Clock } from "lucide-react";
 
+interface RecentEntry {
+  id: string;
+  title: string;
+  createdAt: Date;
+  published: boolean;
+}
+
 interface DashboardStats {
   totalJournalEntries: number;
   totalBlogPosts: number;
-  recentEntries: any[];
+  recentEntries: RecentEntry[];
 }
 
 export default function AdminDashboard() {
-  const { data: session } = useSession();
+  // Session will be used for authentication checks in the future
+  const { data: _session } = useSession();
   const [stats, setStats] = useState<DashboardStats>({
     totalJournalEntries: 0,
     totalBlogPosts: 0,
