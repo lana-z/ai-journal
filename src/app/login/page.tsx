@@ -33,7 +33,7 @@ export default function LoginPage() {
         router.push("/admin");
         router.refresh();
       }
-    } catch (_err) {
+    } catch (error) {
       setError("An error occurred during sign in");
       setLoading(false);
     }

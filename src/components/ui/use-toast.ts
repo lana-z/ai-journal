@@ -31,14 +31,6 @@ function genId() {
   return count.toString()
 }
 
-// Define action type constants as an enum instead of individual constants
-enum ActionTypeEnum {
-  ADD_TOAST = "ADD_TOAST",
-  UPDATE_TOAST = "UPDATE_TOAST",
-  DISMISS_TOAST = "DISMISS_TOAST",
-  REMOVE_TOAST = "REMOVE_TOAST"
-}
-
 type ActionType = ActionTypes
 
 type Action =

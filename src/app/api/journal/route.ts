@@ -44,11 +44,12 @@ export async function POST(request: NextRequest) {
       data: {
         title,
         content,
-        // Use type casting to handle the slug property
-        ...(slug ? { slug } as any : {}),
+        // Use spread operator to conditionally include the slug property
+        ...(slug ? { slug } : {}),
         tags,
         published: published || false,
         authorId: user.id,
+        date: new Date(), // Add the required date field
       },
     });
 
@@ -62,7 +63,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(_request: NextRequest) {
+export async function GET() {
   try {
     // Check if user is authenticated and is admin
     const user = await getCurrentUser();

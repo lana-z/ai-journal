@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getCurrentUser } from "@/lib/auth";
 import slugify from "slugify";
+import { JournalEntry } from "@prisma/client";
+
+// Define an interface that includes the optional slug property
+interface JournalEntryWithSlug extends JournalEntry {
+  slug?: string;
+}
 
 export async function GET(
   request: NextRequest,
@@ -82,12 +88,12 @@ export async function PUT(
     }
 
     // Generate new slug if title changed
-    // Use type assertion to handle the optional slug property
-    const existingSlug = (existingEntry as any).slug;
-    let slug: string | undefined = existingSlug || undefined;
+    const slugExists = typeof existingEntry.slug === "string";
+    const existingSlug = slugExists ? existingEntry.slug : undefined;
+    let slug: string | undefined = existingSlug;
     if (title !== existingEntry.title) {
       slug = slugify(title, { lower: true, strict: true });
-      
+
       // Check if new slug already exists (excluding current entry)
       const slugExists = await prisma.journalEntry.findFirst({
         where: {
@@ -108,8 +114,8 @@ export async function PUT(
       data: {
         title,
         content,
-        // Use type casting to handle the slug property
-        ...(slug ? { slug } as any : {}),
+        // Use spread operator to conditionally include the slug property
+        ...(slug ? { slug } : {}),
         tags,
         published,
         updatedAt: new Date(),
