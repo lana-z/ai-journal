@@ -2,13 +2,40 @@ import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import Nav from "@/components/nav"
 import SocialLinks from "@/components/social-links"
-import SearchEntries from "@/components/search-entries"
-import { getJournalEntries } from "@/lib/db"
+import { FilterBar } from "@/components/filter-bar"
+import { getJournalEntries, getAllTags, type JournalEntryFilters, type JournalEntrySortOption } from "@/lib/db"
 import { JournalEntryCard } from "@/components/journal-entry-card"
+import { Pagination } from "@/components/pagination"
 
-export default async function Home() {
-  // Fetch journal entries from the database
-  const journalEntries = await getJournalEntries();
+// Define page size for pagination
+const ITEMS_PER_PAGE = 5;
+
+interface HomeProps {
+  searchParams: {
+    search?: string;
+    tags?: string;
+    sort?: string;
+    page?: string;
+  };
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  // Await searchParams object
+  const params = await searchParams;
+  
+  const filters: JournalEntryFilters = {
+    search: params.search,
+    tags: params.tags?.split(',').filter(Boolean),
+    sort: (params.sort as JournalEntrySortOption) || 'newest',
+    page: params.page ? parseInt(params.page) : 1,
+    pageSize: ITEMS_PER_PAGE
+  };
+  
+  // Fetch journal entries with filters
+  const { entries: journalEntries, pagination } = await getJournalEntries(filters);
+  
+  // Fetch all unique tags for the filter UI
+  const allTags = await getAllTags();
   
   return (
     <div className="min-h-screen bg-[#1f1f1f]">
@@ -26,7 +53,6 @@ export default async function Home() {
               <span className="bg-gradient-to-r from-[#9333ea] to-[#00e5ff] px-1 neon-glow">A chronological record</span><br />
               of my journey with AI tools and workflows
             </div>
-
           </div>
 
           {/* Abbreviated bio */}
@@ -48,8 +74,8 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Search */}
-          <SearchEntries isMobile={true} />
+          {/* Search and Filters */}
+          <FilterBar allTags={allTags} isMobile={true} />
 
           {/* Journal Entries */}
           <div className="space-y-8">
@@ -59,16 +85,25 @@ export default async function Home() {
               ))
             ) : (
               <Card className="p-8 shadow-md rounded-xl hover:shadow-lg transition-shadow bg-[#2a2a2a] border-gradient card-glow">
-                <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">No entries yet</h4>
+                <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">No entries found</h4>
                 <p className="text-[#f0f0f0] leading-relaxed font-semibold">
-                  No journal entries found.
+                  No journal entries match your search criteria.
                 </p>
                 <p className="text-[#b3b3b3] leading-relaxed mt-2">
-                  Check back soon for new content!
+                  Try adjusting your filters or search terms.
                 </p>
               </Card>
             )}
           </div>
+          
+          {/* Pagination - Mobile */}
+          {pagination.pageCount > 1 && (
+            <Pagination 
+              totalItems={pagination.total}
+              itemsPerPage={pagination.pageSize}
+              currentPage={pagination.page}
+            />
+          )}
         </div>
 
         {/* Desktop layout - hidden on mobile */}
@@ -98,7 +133,6 @@ export default async function Home() {
                 <SocialLinks />
               </div>
             </div>
-
           </div>
 
           {/* Right Column - Content (scrolls normally) */}
@@ -110,9 +144,10 @@ export default async function Home() {
                 of my journey with AI tools and workflows
               </h1>
               <div>
-                <SearchEntries />
+                <FilterBar allTags={allTags} />
               </div>
             </div>
+            
             {/* Journal Entries */}
             <div className="space-y-8">
               {journalEntries.length > 0 ? (
@@ -121,16 +156,25 @@ export default async function Home() {
                 ))
               ) : (
                 <Card className="p-8 shadow-md rounded-xl hover:shadow-lg transition-shadow bg-[#2a2a2a] border-gradient card-glow">
-                  <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">No entries yet</h4>
+                  <h4 className="text-xl font-handwriting mb-3 text-[#9333ea]">No entries found</h4>
                   <p className="text-[#f0f0f0] leading-relaxed font-semibold">
-                    No journal entries found.
+                    No journal entries match your search criteria.
                   </p>
                   <p className="text-[#b3b3b3] leading-relaxed mt-2">
-                    Check back soon for new content!
+                    Try adjusting your filters or search terms.
                   </p>
                 </Card>
               )}
             </div>
+            
+            {/* Pagination - Desktop */}
+            {pagination.pageCount > 1 && (
+              <Pagination 
+                totalItems={pagination.total}
+                itemsPerPage={pagination.pageSize}
+                currentPage={pagination.page}
+              />
+            )}
           </div>
         </div>
       </main>
